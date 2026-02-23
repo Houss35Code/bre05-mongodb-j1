@@ -1,0 +1,854 @@
+Exercices requêtes﻿
+License CC BY-NC-SA 4.0
+Exercice 1﻿
+Combien y a t il de restaurants qui font de la cuisine italienne et qui ont eu un score de 10 au moins ?
+test> use houssounihalifa
+switched to db houssounihalifa
+houssounihalifa> db.restaurants.find({ 
+...   cuisine: "Italian", 
+...   "grades.score": { $gte: 10 } 
+... }).count();
+982
+
+Affichez également le nom, les scores et les coordonnées GPS de ces restaurants. Ordonnez les résultats par ordre décroissant sur les noms des restaurants.
+
+Remarque pour la dernière partie de la question utilisez la méthode sort :
+
+db.collection.find(query, restriction).sort({ key: 1 }); // 1 pour ordre croissant et -1 pour décroissant
+
+houssounihalifa> db.restaurants.find(
+...   { 
+...     cuisine: "Italian", 
+...     "grades.score": { $gte: 10 } 
+...   },
+...   { 
+...     name: 1, 
+...     "grades.score": 1, 
+...     "address.coord": 1, 
+...     _id: 0 
+...   }
+... ).sort({ name: -1 });
+[
+  {
+    address: { coord: [ -73.95734, 40.770682 ] },
+    grades: [ { score: 13 }, { score: 12 }, { score: 24 }, { score: 16 } ],
+    name: 'Zucchero E Pomodori'
+  },
+  {
+    address: { coord: [ -73.9799635, 40.6766802 ] },
+    grades: [ { score: 12 }, { score: 13 }, { score: 12 }, { score: 7 } ],
+    name: "Zito'S Sandwich Shoppe"
+  },
+  {
+    address: { coord: [ -74.235526, 40.5221813 ] },
+    grades: [ { score: 9 }, { score: 14 }, { score: 7 } ],
+    name: 'Ziototo Restaurante & Bar'
+  },
+  {
+    address: { coord: [ -73.9924795, 40.7396687 ] },
+    grades: [ { score: 12 }, { score: 13 }, { score: 3 }, { score: 13 } ],
+    name: 'Zio'
+  },
+  {
+    address: { coord: [ -73.8884267, 40.8548034 ] },
+    grades: [
+      { score: 13 },
+      { score: 22 },
+      { score: 10 },
+      { score: 11 },
+      { score: 12 }
+    ],
+    name: 'Zero Otto Nove Trattoria'
+  },
+  {
+    address: { coord: [ -74.0036229, 40.7391073 ] },
+    grades: [
+      { score: 12 },
+      { score: 18 },
+      { score: 38 },
+      { score: 9 },
+      { score: 13 },
+      { score: 19 }
+    ],
+    name: 'Zampa'
+  },
+  {
+    address: { coord: [ -73.9962769, 40.74386 ] },
+    grades: [ { score: 11 }, { score: 12 } ],
+    name: 'Zagara Wine Bar'
+  },
+  {
+    address: { coord: [ -73.9953153, 40.7224867 ] },
+    grades: [
+      { score: 4 },
+      { score: 2 },
+      { score: 5 },
+      { score: 39 },
+      { score: 8 }
+    ],
+    name: 'Yn'
+  },
+  {
+    address: { coord: [ -73.9022339, 40.7504439 ] },
+    grades: [ { score: 7 }, { score: 7 }, { score: 15 }, { score: 11 } ],
+    name: 'Woodside Pizza'
+  },
+  {
+    address: { coord: [ -73.949395, 40.7807529 ] },
+    grades: [
+      { score: 5 },
+      { score: 5 },
+      { score: 10 },
+      { score: 23 },
+      { score: 11 }
+    ],
+    name: 'Wine Bar & Ristorante'
+  },
+  {
+    address: { coord: [ -73.9705403, 40.646715 ] },
+    grades: [ { score: 8 }, { score: 11 } ],
+    name: 'Wheated'
+  },
+  {
+    address: { coord: [ -74.1307921, 40.6125504 ] },
+    grades: [ { score: 10 }, { score: 11 }, { score: 13 }, { score: 13 } ],
+    name: 'Waterfalls Italian Cuisine'
+  },
+  {
+    address: { coord: [ -74.00041259999999, 40.7315763 ] },
+    grades: [
+      { score: 13 },
+      { score: 22 },
+      { score: 22 },
+      { score: 21 },
+      { score: 10 }
+    ],
+    name: 'Volare Restaurant'
+  },
+  {
+    address: { coord: [ -73.7923368, 40.7866256 ] },
+    grades: [ { score: 12 }, { score: 12 } ],
+    name: 'Vivaldi'
+  },
+  {
+    address: { coord: [ -73.9362494, 40.584253 ] },
+    grades: [ { score: 12 }, { score: 10 } ],
+    name: 'Vittoria Seafood & Grill'
+  },
+  {
+    address: { coord: [ -73.9999749, 40.735162 ] },
+    grades: [ { score: 10 } ],
+    name: 'Virgola'
+  },
+  {
+    address: { coord: [ -73.990844, 40.761319 ] },
+    grades: [
+      { score: 9 },
+      { score: 0 },
+      { score: 26 },
+      { score: 11 },
+      { score: 9 }
+    ],
+    name: 'Vintner Cafe'
+  },
+  {
+    address: { coord: [ -73.7822056, 40.6434612 ] },
+    grades: [ { score: 8 }, { score: 10 } ],
+    name: 'Vino Volo'
+  },
+  {
+    address: { coord: [ -73.99350629999999, 40.6818391 ] },
+    grades: [
+      { score: 34 },
+      { score: 19 },
+      { score: 13 },
+      { score: 8 },
+      { score: 11 }
+    ],
+    name: "Vinny'S Of Carroll Garden Restaurant & Luncheonett"
+  },
+  {
+    address: { coord: [ -73.9757133, 40.7651683 ] },
+    grades: [ { score: 13 } ],
+    name: 'Villagio On The Park'
+  }
+]
+Type "it" for more
+
+
+
+Exercice 2﻿
+Quels sont les restaurants qui ont eu un grade A et un score supérieur ou égal à 20 ?
+houssounihalifa> db.restaurants.find(
+...   { 
+...     grades: { 
+...       $elemMatch: { grade: "A", score: { $gte: 20 } } 
+...     } 
+...   },
+...   { name: 1, _id: 0 }
+... ).sort({ name: -1 });
+[
+  { name: 'Remi' },
+  { name: 'Karizma Lounge' },
+  { name: "Gemini'S Lounge" },
+  { name: 'Feeding Tree Style West Indian Restaurant' },
+  { name: 'Barbone' }
+]
+
+Affichez uniquement les noms et ordonnez les par ordre décroissant. Affichez le nombre de résultat.
+houssounihalifa> db.restaurants.find({ 
+...   grades: { $elemMatch: { grade: "A", score: { $gte: 20 } } } 
+... }).count();
+5
+
+
+Exercice 3﻿
+A l'aide de la méthode distinct trouvez tous les quartiers distincts de NY.
+https://www.mongodb.com/docs/manual/reference/method/db.collection.distinct/
+houssounihalifa> db.restaurants.distinct("borough");
+[
+  'Bronx',
+  'Brooklyn',
+  'Manhattan',
+  'Missing',
+  'Queens',
+  'Staten Island'
+]
+
+
+
+Exercice 4﻿
+Trouvez tous les types de restaurants dans le quartiers du Bronx. Vous pouvez là encore utiliser distinct et un deuxième paramètre pour préciser sur quel ensemble vous voulez appliquer cette close.
+houssounihalifa> db.restaurants.distinct("cuisine", { borough: "Bronx" });
+[
+  'African',
+  'American',
+  'Armenian',
+  'Asian',
+  'Bagels/Pretzels',
+  'Bakery',
+  'Bangladeshi',
+  'Barbecue',
+  'Bottled beverages, including water, sodas, juices, etc.',
+  'Café/Coffee/Tea',
+  'Caribbean',
+  'Chicken',
+  'Chinese',
+  'Chinese/Cuban',
+  'Chinese/Japanese',
+  'Continental',
+  'Delicatessen',
+  'Donuts',
+  'Eastern European',
+  'French',
+  'Fruits/Vegetables',
+  'Greek',
+  'Hamburgers',
+  'Hotdogs',
+  'Ice Cream, Gelato, Yogurt, Ices',
+  'Indian',
+  'Irish',
+  'Italian',
+  'Japanese',
+  'Jewish/Kosher',
+  'Juice, Smoothies, Fruit Salads',
+  'Latin (Cuban, Dominican, Puerto Rican, South & Central American)',
+  'Mediterranean',
+  'Mexican',
+  'Middle Eastern',
+  'Not Listed/Not Applicable',
+  'Other',
+  'Pakistani',
+  'Pancakes/Waffles',
+  'Peruvian',
+  'Pizza',
+  'Pizza/Italian',
+  'Salads',
+  'Sandwiches',
+  'Sandwiches/Salads/Mixed Buffet',
+  'Seafood',
+  'Soul Food',
+  'Soups & Sandwiches',
+  'Spanish',
+  'Steak',
+  'Tex-Mex',
+  'Thai'
+]
+
+
+
+
+Exercice 5﻿
+Trouvez tous les restaurants dans le quartier du Bronx qui ont eu 4 grades.
+houssounihalifa> db.restaurants.find({
+...   borough: "Bronx",
+...   grades: { $size: 4 }
+... });
+[
+  {
+    _id: ObjectId("699c230b01f6c6af8b90785b"),
+    address: {
+      building: '2894',
+      coord: [ -73.815175, 40.8137649 ],
+      street: 'Schurz Ave',
+      zipcode: '10465'
+    },
+    borough: 'Bronx',
+    cuisine: 'American',
+    grades: [
+      {
+        date: ISODate("2014-10-31T00:00:00.000Z"),
+        grade: 'B',
+        score: 18
+      },
+      {
+        date: ISODate("2014-02-20T00:00:00.000Z"),
+        grade: 'A',
+        score: 4
+      },
+      {
+        date: ISODate("2013-06-07T00:00:00.000Z"),
+        grade: 'A',
+        score: 12
+      },
+
+
+
+Exercice 6﻿
+Sélectionnez les restaurants dont le grade est A ou B dans le Bronx.
+houssounihalifa> db.restaurants.find(
+...   { 
+...     borough: "Bronx", 
+...     "grades.grade": { $in: ["A", "B"] } 
+...   },
+...   { name: 1, borough: 1, "grades.grade": 1, _id: 0 }
+... );
+[
+  {
+    borough: 'Bronx',
+    grades: [
+      { grade: 'A' },
+      { grade: 'A' },
+      { grade: 'A' },
+      { grade: 'A' },
+      { grade: 'B' }
+    ],
+    name: 'Morris Park Bake Shop'
+  },
+  {
+    borough: 'Bronx',
+    grades: [ { grade: 'A' }, { grade: 'A' }, { grade: 'A' } ],
+    name: 'Wild Asia'
+  },
+  {
+    borough: 'Bronx',
+    grades: [
+      { grade: 'A' },
+      { grade: 'A' },
+      { grade: 'A' },
+      { grade: 'A' },
+      { grade: 'A' }
+    ],
+    name: 'Carvel Ice Cream'
+  },
+  {
+    borough: 'Bronx',
+    grades: [ { grade: 'A' }, { grade: 'A' }, { grade: 'B' } ],
+    name: 'Happy Garden'
+  },
+  {
+    borough: 'Bronx',
+    grades: [
+      { grade: 'A' },
+      { grade: 'A' },
+      { grade: 'A' },
+      { grade: 'A' },
+      { grade: 'A' }
+    ],
+    name: 'Happy Garden'
+  },
+  {
+    borough: 'Bronx',
+    grades: [ { grade: 'A' }, { grade: 'A' } ],
+    name: 'Manhem Club'
+  },
+  {
+    borough: 'Bronx',
+    grades: [
+      { grade: 'A' },
+      { grade: 'B' },
+      { grade: 'A' },
+      { grade: 'A' },
+      { grade: 'B' }
+    ],
+    name: 'The New Starling Athletic Club Of The Bronx'
+  },
+  {
+    borough: 'Bronx',
+    grades: [
+      { grade: 'A' },
+      { grade: 'A' },
+      { grade: 'A' },
+      { grade: 'B' },
+      { grade: 'A' },
+      { grade: 'A' },
+      { grade: 'C' }
+    ],
+    name: 'Yankee Tavern'
+  },
+  {
+    borough: 'Bronx',
+    grades: [
+      { grade: 'A' },
+      { grade: 'B' },
+      { grade: 'A' },
+      { grade: 'B' },
+      { grade: 'A' }
+    ],
+    name: 'Mcdwyers Pub'
+  },
+  {
+    borough: 'Bronx',
+    grades: [
+      { grade: 'A' },
+      { grade: 'B' },
+      { grade: 'A' },
+      { grade: 'B' },
+      { grade: 'A' },
+      { grade: 'C' }
+    ],
+    name: 'The Punch Bowl'
+  },
+  {
+    borough: 'Bronx',
+    grades: [
+      { grade: 'B' },
+      { grade: 'A' },
+      { grade: 'B' },
+      { grade: 'A' },
+      { grade: 'A' },
+      { grade: 'B' }
+    ],
+    name: 'Munchtime'
+  },
+  {
+    borough: 'Bronx',
+    grades: [
+      { grade: 'A' },
+      { grade: 'A' },
+      { grade: 'A' },
+      { grade: 'B' },
+      { grade: 'A' },
+      { grade: 'A' }
+    ],
+    name: 'Ihop'
+  },
+  {
+    borough: 'Bronx',
+    grades: [
+      { grade: 'A' },
+      { grade: 'A' },
+      { grade: 'A' },
+      { grade: 'B' },
+      { grade: 'A' }
+    ],
+    name: "Lulu'S Coffee Shop"
+  },
+  {
+    borough: 'Bronx',
+    grades: [ { grade: 'B' }, { grade: 'A' }, { grade: 'A' }, { grade: 'A' } ],
+    name: 'Marina Delray'
+  },
+  {
+    borough: 'Bronx',
+    grades: [ { grade: 'A' }, { grade: 'A' }, { grade: 'A' }, { grade: 'A' } ],
+    name: "The Lark'S Nest"
+  },
+  {
+    borough: 'Bronx',
+    grades: [ { grade: 'A' }, { grade: 'A' }, { grade: 'A' }, { grade: 'A' } ],
+    name: 'African Terrace'
+  },
+  {
+    borough: 'Bronx',
+    grades: [ { grade: 'A' }, { grade: 'A' }, { grade: 'A' } ],
+    name: 'Terrace Cafe'
+  },
+  {
+    borough: 'Bronx',
+    grades: [ { grade: 'A' }, { grade: 'A' }, { grade: 'A' }, { grade: 'A' } ],
+    name: 'Cool Zone'
+  },
+  {
+    borough: 'Bronx',
+    grades: [ { grade: 'A' }, { grade: 'A' }, { grade: 'A' }, { grade: 'A' } ],
+    name: 'Beaver Pond'
+  },
+  {
+    borough: 'Bronx',
+    grades: [ { grade: 'A' }, { grade: 'A' }, { grade: 'A' }, { grade: 'A' } ],
+    name: 'African Market (Baboon Cafe)'
+  }
+]
+Type "it" for more
+
+
+
+Exercice 7﻿
+Même question mais, on aimerait récupérer les restaurants qui ont eu à la dernière inspection (elle apparaît théoriquement en premier dans la liste des grades) un A ou B. Vous pouvez utilisez la notion d'indice sur la clé grade :
+
+"grades.0.grade"; // équivalent de grades[0].grade en js
+houssounihalifa> db.restaurants.find(
+...   { 
+...     borough: "Bronx", 
+...     "grades.0.grade": { $in: ["A", "B"] } 
+...   },
+...   { name: 1, "grades.0.grade": 1, _id: 0 }
+... );
+[
+  { grades: [ {}, {}, {}, {}, {} ], name: 'Morris Park Bake Shop' },
+  { grades: [ {}, {}, {} ], name: 'Wild Asia' },
+  { grades: [ {}, {}, {}, {}, {} ], name: 'Carvel Ice Cream' },
+  { grades: [ {}, {}, {} ], name: 'Happy Garden' },
+  { grades: [ {}, {}, {}, {}, {} ], name: 'Happy Garden' },
+  { grades: [ {}, {} ], name: 'Manhem Club' },
+  {
+    grades: [ {}, {}, {}, {}, {} ],
+    name: 'The New Starling Athletic Club Of The Bronx'
+  },
+  {
+    grades: [
+      {}, {}, {}, {},
+      {}, {}, {}
+    ],
+    name: 'Yankee Tavern'
+  },
+  { grades: [ {}, {}, {}, {}, {} ], name: 'Mcdwyers Pub' },
+  { grades: [ {}, {}, {}, {}, {}, {} ], name: 'The Punch Bowl' },
+  { grades: [ {}, {}, {}, {}, {}, {} ], name: 'Munchtime' },
+  { grades: [ {}, {}, {}, {}, {}, {} ], name: 'Ihop' },
+  { grades: [ {}, {}, {}, {}, {} ], name: "Lulu'S Coffee Shop" },
+  { grades: [ {}, {}, {}, {} ], name: 'Marina Delray' },
+  { grades: [ {}, {}, {}, {} ], name: "The Lark'S Nest" },
+  { grades: [ {}, {}, {}, {} ], name: 'African Terrace' },
+  { grades: [ {}, {}, {} ], name: 'Terrace Cafe' },
+  { grades: [ {}, {}, {}, {} ], name: 'Cool Zone' },
+  { grades: [ {}, {}, {}, {} ], name: 'Beaver Pond' },
+  { grades: [ {}, {}, {}, {} ], name: 'African Market (Baboon Cafe)' }
+]
+Type "it" for more
+
+
+
+Exercice 8﻿
+Sélectionnez maintenant tous les restaurants qui ont le mot "Coffee" ou "coffee" dans la propriété name du document.
+
+Utilisez une RegEx :
+
+/[cC]offee/
+
+houssounihalifa> db.restaurants.find(
+...   { name: /[cC]offee/ },
+...   { name: 1, _id: 0 }
+... );
+[
+  { name: 'Mee Sum Coffee Shop' },
+  { name: "Lulu'S Coffee Shop" },
+  { name: 'Narrows Coffee Shop' },
+  { name: 'Flame Restaurant Coffee House' },
+  { name: 'Viand Coffee Shop' },
+  { name: "Steve'S Coffee Shop" },
+  { name: 'Nectar Coffee Shop' },
+  { name: 'Andrews Coffee Shop' },
+  { name: 'Imperial Coffee House' },
+  { name: 'Omega Coffee Shop' },
+  { name: 'Classic Coffee Shop' },
+  { name: 'E & L Bakery & Coffee Shop' },
+  { name: 'Sunrise Coffee Shop' },
+  { name: 'Queens Coffee Shop' },
+  { name: 'Landmark Coffee Shop' },
+  { name: 'Starbucks Coffee' },
+  { name: 'Starbucks Coffee' },
+  { name: 'Starbucks Coffee' },
+  { name: 'Coffee Shop' },
+  { name: "Mike'S Coffee Shop" }
+]
+Type "it" for more
+
+
+
+Exercice 9﻿
+Même question mais uniquement dans le quartier du Bronx.
+houssounihalifa> db.restaurants.find(
+...   { 
+...     borough: "Bronx", 
+...     "grades.0.grade": { $in: ["A", "B"] } 
+...   },
+...   { name: 1, borough: 1, "grades.0.grade": 1, _id: 0 }
+... );
+[
+  {
+    borough: 'Bronx',
+    grades: [ {}, {}, {}, {}, {} ],
+    name: 'Morris Park Bake Shop'
+  },
+  { borough: 'Bronx', grades: [ {}, {}, {} ], name: 'Wild Asia' },
+  {
+    borough: 'Bronx',
+    grades: [ {}, {}, {}, {}, {} ],
+    name: 'Carvel Ice Cream'
+  },
+  { borough: 'Bronx', grades: [ {}, {}, {} ], name: 'Happy Garden' },
+  {
+    borough: 'Bronx',
+    grades: [ {}, {}, {}, {}, {} ],
+    name: 'Happy Garden'
+  },
+  { borough: 'Bronx', grades: [ {}, {} ], name: 'Manhem Club' },
+  {
+    borough: 'Bronx',
+    grades: [ {}, {}, {}, {}, {} ],
+    name: 'The New Starling Athletic Club Of The Bronx'
+  },
+  {
+    borough: 'Bronx',
+    grades: [
+      {}, {}, {}, {},
+      {}, {}, {}
+    ],
+    name: 'Yankee Tavern'
+  },
+  {
+    borough: 'Bronx',
+    grades: [ {}, {}, {}, {}, {} ],
+    name: 'Mcdwyers Pub'
+  },
+  {
+    borough: 'Bronx',
+    grades: [ {}, {}, {}, {}, {}, {} ],
+    name: 'The Punch Bowl'
+  },
+  {
+    borough: 'Bronx',
+    grades: [ {}, {}, {}, {}, {}, {} ],
+    name: 'Munchtime'
+  },
+  {
+    borough: 'Bronx',
+    grades: [ {}, {}, {}, {}, {}, {} ],
+    name: 'Ihop'
+  },
+  {
+    borough: 'Bronx',
+    grades: [ {}, {}, {}, {}, {} ],
+    name: "Lulu'S Coffee Shop"
+  },
+  {
+    borough: 'Bronx',
+    grades: [ {}, {}, {}, {} ],
+    name: 'Marina Delray'
+  },
+  {
+    borough: 'Bronx',
+    grades: [ {}, {}, {}, {} ],
+    name: "The Lark'S Nest"
+  },
+  {
+    borough: 'Bronx',
+    grades: [ {}, {}, {}, {} ],
+    name: 'African Terrace'
+  },
+  { borough: 'Bronx', grades: [ {}, {}, {} ], name: 'Terrace Cafe' },
+  { borough: 'Bronx', grades: [ {}, {}, {}, {} ], name: 'Cool Zone' },
+  { borough: 'Bronx', grades: [ {}, {}, {}, {} ], name: 'Beaver Pond' },
+  {
+    borough: 'Bronx',
+    grades: [ {}, {}, {}, {} ],
+    name: 'African Market (Baboon Cafe)'
+  }
+]
+Type "it" for more
+
+
+
+Exercice 10﻿
+Trouvez tous les restaurants avec les mots Coffee ou Restaurant et qui ne contiennent pas le mot Starbucks. Puis, même question mais uniquement dans le quartier du Bronx.
+houssounihalifa> db.restaurants.find(
+...   {
+...     $and: [
+...       { name: { $in: [/Coffee/i, /Restaurant/i] } },
+...       { name: { $not: /Starbucks/i } }
+...     ]
+...   },
+...   { name: 1, _id: 0 }
+... );
+[
+  { name: 'Dj Reynolds Pub And Restaurant' },
+  { name: 'Ho Mei Restaurant' },
+  { name: 'Palm Restaurant' },
+  { name: 'Old Town Bar & Restaurant' },
+  { name: 'Seville Restaurant' },
+  { name: 'Ben-Best Deli & Restaurant' },
+  { name: 'Marchis Restaurant' },
+  { name: 'New Park Pizzeria & Restaurant' },
+  { name: 'Forlinis Restaurant' },
+  { name: "Dorrian'S Red Hand Restaurant" },
+  { name: 'Keats Restaurant' },
+  { name: 'Spain Restaurant & Bar' },
+  { name: 'V & T Restaurant' },
+  { name: "Jahn'S Restaurant" },
+  { name: 'King Yum Restaurant' },
+  { name: 'Joe Allen Restaurant' },
+  { name: 'Il Vagabondo Restaurant' },
+  { name: 'Barbetta Restaurant' },
+  { name: "Gargiulo'S Restaurant" },
+  { name: "Patsy'S Italian Restaurant" }
+]
+Type "it" for more
+Puis, même question mais uniquement dans le quartier du Bronx.
+houssounihalifa> db.restaurants.find(
+...   {
+...     borough: "Bronx",
+...     $and: [
+...       { name: { $in: [/Coffee/i, /Restaurant/i] } },
+...       { name: { $not: /Starbucks/i } }
+...     ]
+...   },
+...   { name: 1, borough: 1, _id: 0 }
+... );
+[
+  { borough: 'Bronx', name: "Lulu'S Coffee Shop" },
+  { borough: 'Bronx', name: 'Blue Bay Restaurant' },
+  { borough: 'Bronx', name: 'Seashore Restaurant' },
+  { borough: 'Bronx', name: "Johnny'S Reef Restaurant" },
+  { borough: 'Bronx', name: "Tony'S Pier Restaurant" },
+  { borough: 'Bronx', name: 'Quality Cafe & Restaurant' },
+  { borough: 'Bronx', name: 'Sabrosura Restaurant' },
+  { borough: 'Bronx', name: "Jp'S Waterside Restaurant" },
+  { borough: 'Bronx', name: 'John & Joe Pizzeria & Restaurant' },
+  { borough: 'Bronx', name: 'Short Stop Restaurant' },
+  { borough: 'Bronx', name: 'Burger Barn Restaurant' },
+  { borough: 'Bronx', name: 'Venice Restaurant' },
+  { borough: 'Bronx', name: "Spoto'S Restaurant" },
+  { borough: 'Bronx', name: 'El Molino Rojo Restaurant' },
+  { borough: 'Bronx', name: 'E & L Bakery & Coffee Shop' },
+  { borough: 'Bronx', name: "Dominick'S Bar & Restaurant" },
+  { borough: 'Bronx', name: "Lolita'S Restaurant" },
+  { borough: 'Bronx', name: 'New Pabellon De Oro Restaurant' },
+  { borough: 'Bronx', name: 'Cosmos Restaurant' },
+  {
+    borough: 'Bronx',
+    name: 'Feeding Tree Style West Indian Restaurant'
+  }
+]
+Type "it" for more
+
+
+
+Exercice 11﻿
+Trouvez tous les restaurants qui ont dans leur nom le mot clé coffee, qui sont dans le bronx ou dans Brooklyn, qui ont eu exactement 4 appréciations (grades).
+houssounihalifa> db.restaurants.find(
+...   {
+...     name: /coffee/i,
+...     borough: { $in: ["Bronx", "Brooklyn"] },
+...     grades: { $size: 4 }
+...   },
+...   { name: 1, borough: 1, "grades": 1, _id: 0 }
+... );
+[
+  {
+    borough: 'Brooklyn',
+    grades: [
+      {
+        date: ISODate("2014-07-24T00:00:00.000Z"),
+        grade: 'A',
+        score: 7
+      },
+      {
+        date: ISODate("2014-02-04T00:00:00.000Z"),
+        grade: 'A',
+        score: 11
+      },
+      {
+        date: ISODate("2013-02-04T00:00:00.000Z"),
+        grade: 'A',
+        score: 4
+      },
+      {
+        date: ISODate("2012-02-10T00:00:00.000Z"),
+        grade: 'A',
+        score: 9
+      }
+    ],
+    name: 'Narrows Coffee Shop'
+  },
+  {
+    borough: 'Bronx',
+    grades: [
+      {
+        date: ISODate("2014-12-31T00:00:00.000Z"),
+        grade: 'A',
+        score: 9
+      },
+      {
+        date: ISODate("2014-07-28T00:00:00.000Z"),
+        grade: 'A',
+        score: 10
+      },
+      {
+        date: ISODate("2013-07-24T00:00:00.000Z"),
+        grade: 'A',
+        score: 7
+      },
+      {
+        date: ISODate("2012-08-09T00:00:00.000Z"),
+        grade: 'A',
+        score: 8
+      }
+    ],
+    name: 'E & L Bakery & Coffee Shop'
+  },
+  {
+    borough: 'Brooklyn',
+    grades: [
+      {
+        date: ISODate("2014-10-15T00:00:00.000Z"),
+        grade: 'A',
+        score: 11
+      },
+      {
+        date: ISODate("2013-11-01T00:00:00.000Z"),
+        grade: 'A',
+        score: 7
+      },
+
+
+Exercice 12﻿
+Affichez la liste des restaurants dont le nom commence et se termine par une voyelle.
+houssounihalifa> db.restaurants.find(
+...   { name: /^[aeiouy].*[aeiouy]$/i },
+...   { name: 1, _id: 0 }
+... );
+[
+  { name: 'Irish Cottage' },
+  { name: 'One If By Land Two If By Sea' },
+  { name: 'African Terrace' },
+  { name: 'Elephant & Castle' },
+  { name: "Armando'S Pizza" },
+  { name: 'Omonia Cafe' },
+  { name: 'Yankee Jz Pizza' },
+  { name: 'Il Mulino' },
+  { name: 'El Caribe' },
+  { name: 'Omen Japanese Cuisine' },
+  { name: 'Ozone Pizzeria' },
+  { name: 'Amsterdam Restaurant & Tapas Lounge' },
+  { name: 'Imperial Coffee House' },
+  { name: 'E.A.T. Cafe' },
+  { name: 'Arriba Arriba' },
+  { name: 'Il Toscano Ristorante' },
+  { name: "Irene'S Place" },
+  { name: 'Arirang Hibachi Steak House' },
+  { name: 'Oakland Cafeteria/Queensborough Community College' },
+  { name: "Erin'S Isle" }
+]
+Type "it" for more

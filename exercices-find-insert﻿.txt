@@ -1,0 +1,60 @@
+Exercices find et insert﻿
+Exercice 1﻿
+Compter le nombre de restaurants dans le quartier de Brooklyn.
+
+Pour compter le résultat d'une requête vous avez deux syntaxes possibles :
+
+Syntaxe avec une boucle JS﻿
+let count = 0;
+db.collection.find().forEach((doc) => count++);
+houssounihalifa> count
+6086
+
+Utiliser la méthode count﻿
+db.collection.find(query, restriction).count();
+houssounihalifa> db.restaurants.find({ borough: "Brooklyn" }).count();
+6086
+
+Faites votre requête avec la méthode boucle JS puis comparez votre résultat à celui de la méthode count.
+
+J'obtiens le même chiffre pour les deux méthodes (à savoir 6086 si j'ai bien importé les 25359 documents).
+La différence :
+La méthode count() est immédiate car MongoDB calcule cela en interne.
+La boucle forEach est plus lente car elle doit "charger" chaque document un par un dans la mémoire pour faire l'opération count++.
+
+
+Exercice 2﻿
+Vous allez devoir écrire la requête qui va insérer un nouveau restaurant :
+Ce restaurant s'appelera "Freshly Burger", il proposera des burgers.
+Son adresse est le 165 Farragut Road dans le quartier de Brooklyn.
+L'id du restaurant est '45872563'.
+Il a été contrôlé 2 fois, la première le 03/04/2015, il a eu le grade 'A+' et la note de 15. La seconde fois le 06/06/2021, il a obtenu le grade 'A++' avec la note de 18.
+db.restaurants.insertOne({
+  restaurant_id: "45872563",
+  name: "Freshly Burger",
+  cuisine: "Burgers",
+  borough: "Brooklyn",
+  address: {
+    building: "165",
+    street: "Farragut Road"
+  },
+  grades: [
+    { date: new Date("2015-04-03"), grade: "A+", score: 15 },
+    { date: new Date("2021-06-06"), grade: "A++", score: 18 }
+  ]
+});
+
+Vérifiez bien ensuite que votre restaurant a bien été inséré.
+db.restaurants.find({ restaurant_id: "45872563" });
+
+
+Exercice 3﻿
+Donnez les noms (et uniquement les noms) des restaurants ayant déjà obtenu le score de 20.
+db.restaurants.find(
+  { "grades.score": 20 },
+  { name: 1, _id: 0 }
+);
+
+Pour vérifier un champ imbriqué dans l'objet utilisez la syntaxe "objet.objet", par exemple :
+
+db.restaurants.find({"address.building" : 165});
